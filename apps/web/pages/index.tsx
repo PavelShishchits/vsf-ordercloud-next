@@ -3,7 +3,7 @@ import { GetServerSidePropsContext } from 'next';
 import { dehydrate } from '@tanstack/react-query';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { RenderContent } from '~/components';
-import { useContent, prefetchContent, ContentDynamicPage } from '~/hooks';
+import { useContent, prefetchContent, ContentDynamicPage, useUser } from '~/hooks';
 import { DefaultLayout } from '~/layouts';
 
 const contentUrl = 'home-page';
@@ -30,9 +30,11 @@ export async function getServerSideProps({ res, locale }: GetServerSidePropsCont
 
 export default function Home() {
   const { data: content } = useContent<ContentDynamicPage>(contentUrl);
+  const { data: user } = useUser();
 
   return (
     <DefaultLayout>
+      {user && <div>{user.Email}</div>}
       {content && (
         <div className="cms-content">
           {content.map(({ fields }, index) => (

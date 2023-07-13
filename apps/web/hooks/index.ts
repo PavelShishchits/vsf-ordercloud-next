@@ -8,3 +8,4 @@ export * from './useProductRecommended';
 export * from './useContent';
 export * from './useProductBreadcrumbs';
 export * from './usePagination';
+export * from './useUser';
